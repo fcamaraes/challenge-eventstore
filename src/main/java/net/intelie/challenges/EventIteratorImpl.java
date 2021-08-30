@@ -7,7 +7,6 @@ public class EventIteratorImpl implements EventIterator {
     private Iterator<Event> eventIterator;
     private ConcurrentHashMap<String, Event> eventStore;
     private Event currentEvent;
-    private boolean moveNextCalledStatus = false;
 
 
     EventIteratorImpl(Iterator<Event> iterator, ConcurrentHashMap<String, Event> eventStore) {
@@ -17,13 +16,10 @@ public class EventIteratorImpl implements EventIterator {
 
     @Override
     public boolean moveNext() {
-        moveNextCalledStatus = true;
-
         while (eventIterator.hasNext()) {
             currentEvent = eventIterator.next();
             return true;
         }
-        currentEvent = null;
         return false;
     }
 
@@ -37,7 +33,7 @@ public class EventIteratorImpl implements EventIterator {
     @Override
     public void remove() {
         checkEvent();
-        eventStore.remove(currentEvent);
+        eventStore.remove(currentEvent.id());
     }
 
     @Override
@@ -46,7 +42,7 @@ public class EventIteratorImpl implements EventIterator {
     }
 
     private void checkEvent() {
-        if (!moveNextCalledStatus || currentEvent == null) {
+        if (currentEvent == null) {
             throw new IllegalStateException();
         }
     }
