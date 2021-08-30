@@ -12,27 +12,30 @@ public class EventStoreImpl implements EventStore {
     }
 
     @Override
-    public void insert(Event event) {
-        eventStore.put(event.id(), event);
-    }
+    public void insert(Event event) { eventStore.put(event.id(), event); }
 
     @Override
     public void removeAll(String type) {
-        eventStore.remove(type);
+        eventStore.values().removeIf(event -> event.type() == type);
     }
 
     public int getSize() {
         return eventStore.size();
     }
 
+    public boolean contains(String key) {
+        return eventStore.containsKey(key);
+    }
+
+
     @Override
-    public EventIterator query(String type, long startTime, long endTime) {
+    public EventIteratorImpl query(String type, long startTime, long endTime) {
         Iterator<Event> iterator = eventStore
                 .values()
                 .stream()
                 .filter(event -> event.type() == type
-                        && event.timestamp() >= startTime
-                        && event.timestamp() <= endTime)
+                        && startTime <= event.timestamp()
+                        && event.timestamp() < endTime)
                 .iterator();
 
         return new EventIteratorImpl(iterator, eventStore);
