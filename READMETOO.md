@@ -19,9 +19,23 @@ The iterator was also simple but while testing I found the need to use the `Even
 Testing was the most difficult part since I don't have much experience with it, I tried some simple tests such as inserting, deleting and querying an element but had some problems with the testing concurrency and thread-safety. I think I may have a gap in knowlegde about multithreading to see if the problem was with my tests or if they weren't possible in the first place.
 
 ## What is missing
-More tests. I think I haven't tested much, in part because of time but also experience since sometimes I didn't know what to test for.
+More tests. I think I haven't tested much, in part because of time but also experience since sometimes I didn't know what to test for. Also one of the tests is incomplete, I was trying to test for when there would be concurrent insertions and deletions and I couldn't make it work.
 
 ## Conclusion
 I think this was a good experience, it was one of the most interesting challenges I have done in a while. I think this is because I have more experience with frontend development so I didn't have much exposure to concerns about data structures and multithreading.
+
+## References
+I had to search a lot to finish this challenge so I think it would be good to provide some links that I used.
+
+- https://www.geeksforgeeks.org/concurrenthashmap-in-java/
+- https://stackoverflow.com/questions/36012298/filter-concurrenthashmap-by-value
+- https://www.baeldung.com/java-testing-multithreaded
+- https://morioh.com/p/03bc04a2af32
+- https://codingcompiler.com/concurrent-collections-in-java/
+- https://stackoverflow.com/questions/8567495/how-can-i-test-that-concurrenthashmap-is-truly-thread-safe
+- https://stackoverflow.com/questions/40805373/java-hashmap-multiple-thread-put
+- https://stackoverflow.com/questions/37127285/iterate-over-concurrenthashmap-while-deleting-entries
+- https://medium.com/coding-corpus/concurrent-collections-in-java-9b131e41b3ad
+- https://stackoverflow.com/questions/33688787/how-to-unit-test-java-multiple-thread
 
 
