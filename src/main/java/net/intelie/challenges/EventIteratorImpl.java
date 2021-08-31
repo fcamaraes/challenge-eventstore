@@ -23,27 +23,20 @@ public class EventIteratorImpl implements EventIterator {
         return false;
     }
 
-
     @Override
     public Event current() {
-        checkEvent();
+        if (currentEvent == null) throw new IllegalStateException();
         return currentEvent;
     }
 
     @Override
     public void remove() {
-        checkEvent();
+        if (currentEvent == null) throw new IllegalStateException();
         eventStore.remove(currentEvent.id());
     }
 
     @Override
     public void close() throws Exception {
 
-    }
-
-    private void checkEvent() {
-        if (currentEvent == null) {
-            throw new IllegalStateException();
-        }
     }
 }

@@ -27,7 +27,11 @@ public class EventStoreImpl implements EventStore {
         return eventStore.containsKey(key);
     }
 
-
+    /**
+     * I use the stream method to then be able to filter the
+     * eventStore values, I also pass the eventStore itself,
+     * so that I can use its remove method.
+     */
     @Override
     public EventIteratorImpl query(String type, long startTime, long endTime) {
         Iterator<Event> iterator = eventStore
